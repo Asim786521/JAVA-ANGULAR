@@ -9,9 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class EcommerceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication application = new SpringApplication(EcommerceApplication.class);
-		application.setAllowBeanDefinitionOverriding(true);
-		application.run(args);
+		SpringApplication.run(EcommerceApplication.class);
 
 
 	}
