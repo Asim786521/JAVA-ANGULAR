@@ -1,0 +1,24 @@
+nav {
+    background-color: #f8f9fa;
+    padding: 10px;
+  }
+  
+  nav ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+  }
+  
+  nav ul li {
+    display: inline; /* Align items horizontally */
+    margin-right: 15px; /* Space between items */
+  }
+  
+  nav ul li a {
+    text-decoration: none; /* Remove underline */
+    color: #007bff; /* Bootstrap primary color */
+  }
+  
+  nav ul li a:hover {
+    text-decoration: underline; /* Underline on hover */
+  }
+  

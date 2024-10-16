@@ -1,0 +1,36 @@
+<h2>Edit Product</h2>
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Product Name:</label>
+    <input id="name" formControlName="name" />
+    <div *ngIf="productForm?.get('name')?.invalid && productForm?.get('name')?.touched">
+      Product name is required.
+    </div>
+  </div>
+
+  <div>
+    <label for="description">Description:</label>
+    <textarea id="description" formControlName="description"></textarea>
+    <div *ngIf="productForm?.get('description')?.invalid && productForm?.get('description')?.touched">
+      Description is required.
+    </div>
+  </div>
+
+  <div>
+    <label for="price">Price:</label>
+    <input id="price" type="number" formControlName="price" />
+    <div *ngIf="productForm?.get('price')?.invalid && productForm?.get('price')?.touched">
+      A valid price is required.
+    </div>
+  </div>
+
+  <div>
+    <label for="imageUrl">Image URL:</label>
+    <input id="imageUrl" formControlName="imageUrl" />
+    <div *ngIf="productForm?.get('imageUrl')?.invalid && productForm.get('imageUrl')?.touched">
+      Image URL is required.
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="productForm.invalid">Update Product</button>
+</form>
