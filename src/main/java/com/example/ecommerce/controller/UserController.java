@@ -4,10 +4,12 @@ import com.example.ecommerce.entity.Role;
 import com.example.ecommerce.entity.User;
 import com.example.ecommerce.model.AuthenticationRequest;
 import com.example.ecommerce.model.AuthenticationResponse;
+import com.example.ecommerce.model.RegisterRequest;
 import com.example.ecommerce.repository.RoleRepository;
 import com.example.ecommerce.repository.UserRepository;
 import com.example.ecommerce.service.UserService;
 import com.example.ecommerce.utills.JwtUtil;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -44,9 +46,13 @@ public class UserController {
     private JwtUtil jwtUtil;
 
     @PostMapping("/register")
-    public User registerUser(@RequestBody User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        Role role = roleRepository.findByName("ROLE_USER")
+    public User registerUser( @RequestBody @Valid RegisterRequest registerRequest) {
+
+        User user=new User();
+        user.setUsername(registerRequest.getUsername());
+        user.setEmail(registerRequest.getEmail());
+        user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+        Role role = roleRepository.findByName(registerRequest.getRole())
                 .orElseThrow(() -> new RuntimeException("Role not found"));
 
         user.setRoleId(role.getId());
@@ -55,7 +61,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public AuthenticationResponse loginUser(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+    public AuthenticationResponse loginUser(@RequestBody @Valid AuthenticationRequest authenticationRequest) throws Exception {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
         );
