@@ -1,2 +1,2 @@
 # JAVA-ANGULAR
-java springboot with angular full stackapplicaiton
+java springboot with angular full stack applicaiton
